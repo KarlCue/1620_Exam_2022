@@ -77,11 +77,12 @@ function displayContact(event){
   }
 
   for (const contactInfo of contactsList ){
-    if (contactInfo.name === names)
+    if (contactInfo.name == names)
       phone = contactInfo.phone
       email = contactInfo.email
       name2 = contactInfo.name
       image = contactInfo.image
+      console.log(names)
   }
       displayContactTemplate = ` 
         <div id="options">
@@ -90,7 +91,7 @@ function displayContact(event){
             <h1><img src="img/${image}">${name2}</h1>
             <p>${email}</p>
             <p>${phone}</p>
-        </div>  `;
+        </div>  `
 
       displaySingleContact.insertAdjacentHTML("afterbegin", displayContactTemplate);
 //Delete Contact
@@ -102,5 +103,5 @@ function displayContact(event){
       }
       deleteContact.addEventListener("click", deleteReadText)
 }
-displaySingleContact.addEventListener('click', displayContact)
+allContactsList.addEventListener('click', displayContact)
 
