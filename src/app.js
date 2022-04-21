@@ -55,13 +55,52 @@ const contactsList = [
 
 //Load Contacts
 
-const allContactsList = document.querySelector('#display_single_contact')
+const allContactsList = document.querySelector('#display_all_contacts')
 function displayAllContact(){
   for (const contact of contactsList){
     console.log(contact)
-    const contactTemplate = `<div>${contact.image}${contact.name}</div>`
+    const contactTemplate = `<div class=contactListCSS><img src="img/${contact.image}">${contact.name}</div>`
     allContactsList.insertAdjacentHTML("afterbegin",contactTemplate)
   }
 }
 
 displayAllContact()
+
+//Display Single Contact
+
+const displaySingleContact = document.querySelector('#display_single_contact')
+
+function displayContact(event){
+  console.log(event)
+  if (event.target.localName === 'div'){
+    names = event.target.innerText
+  }
+
+  for (const contactInfo of contactsList ){
+    if (contactInfo.name === names)
+      phone = contactInfo.phone
+      email = contactInfo.email
+      name2 = contactInfo.name
+      image = contactInfo.image
+  }
+      displayContactTemplate = ` 
+        <div id="options">
+            <button class="deleteContactBtn">x</button>
+        <div class="displayContact">
+            <h1><img src="img/${image}">${name2}</h1>
+            <p>${email}</p>
+            <p>${phone}</p>
+        </div>  `;
+
+      displaySingleContact.insertAdjacentHTML("afterbegin", displayContactTemplate);
+//Delete Contact
+      const deleteContact = document.querySelector(".deleteContactBtn")
+      function deleteReadText() {
+        while (displaySingleContact.hasChildNodes()) {
+          displaySingleContact.removeChild(displaySingleContact.firstChild)
+        }
+      }
+      deleteContact.addEventListener("click", deleteReadText)
+}
+displaySingleContact.addEventListener('click', displayContact)
+
